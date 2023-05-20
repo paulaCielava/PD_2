@@ -19,7 +19,10 @@
                 <tr>
                     <td>{{ $razotajs->id }}</td>
                     <td>{{ $razotajs->name }}</td>
-                    <td>Labot / Dzēst</td>
+                    <td> 
+                        <a href="/razotajs/update/{{ $razotajs->id }}" class="btn btn-outline-primary btn-sm">Labot</a>
+                        / Dzēst
+                    </td>
                 </tr>
                 @endforeach
                 

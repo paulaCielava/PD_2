@@ -2,7 +2,6 @@
 
 @section('content')
 
-    <h1>{{ $title }}</h1>
 
     @if ($errors->any())
         <div class="alert alert-danger" role="alert">
@@ -10,8 +9,8 @@
         </div>
     @endif
 
-    <form method="post" action="/razotajs/put">
-        @csrf
+    <form method="post" action="{{ $razotajs->exists ? '/razotajs/patch/' . $razotajs->id : '/razotajs/put' }}">
+       @csrf
 
         <div class="mb-3">
             <label for="razotajs-name"> Ražotāja nosaukums </label>
@@ -20,7 +19,8 @@
                 type="text" 
                 id="razotajs-name" 
                 name="name"
-                class="form-control @error('name') is-invalid @enderror">
+                class="form-control @error('name') is-invalid @enderror"
+                value="{{ old('name', $razotajs->name) }}">
 
             @error('name')
                 <p>{{ $errors->first('name') }}</p>
@@ -29,7 +29,7 @@
         </div>
 
 
-        <button type="submit" class="btn btn-primary"> Saglabāt </button>
+        <button type="submit" class="btn btn-primary"> {{ $razotajs->exists ? 'Atjaunot' : "Pievienot" }} </button>
 
     </form>
 
