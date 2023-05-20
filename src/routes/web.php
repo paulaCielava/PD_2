@@ -19,3 +19,7 @@ Route::get('/', [HomeController::class, 'index']);
 
 
 Route::get('/razotajs', [RazotajsController::class, 'list']);
+
+Route::get('/razotajs/create', [RazotajsController::class, 'create']);
+
+Route::post('/razotajs/put',  [RazotajsController::class, 'put']);

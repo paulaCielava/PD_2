@@ -18,4 +18,22 @@ class RazotajsController extends Controller
             ]
         );
     }
+
+    // display new razotajs form
+    public function create() {
+        return view(
+            'razotajs.form',
+            [
+                'title' => 'Pievienot jaunu ražotāju'
+            ]
+        );
+    }
+
+    // save new razotajs
+    public function put(Request $request) {
+        $validateDate = $request->validate([
+            'name' => 'required',
+        ]);
+    }
+
 }
