@@ -69,6 +69,7 @@ class RazotajsController extends Controller
 
    // ierakstu dzēšana
    public function delete(Razotajs $razotajs){
-        dd($razotajs);
+        $razotajs->delete();
+        return redirect('/razotajs');
    }
 }
