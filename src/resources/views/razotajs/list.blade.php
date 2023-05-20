@@ -21,7 +21,11 @@
                     <td>{{ $razotajs->name }}</td>
                     <td> 
                         <a href="/razotajs/update/{{ $razotajs->id }}" class="btn btn-outline-primary btn-sm">Labot</a>
-                        / Dzēst
+                        / 
+                        <form method="post" action="/razotajs/delete/{{ $razotajs->id }}" class="deletion-form d-inline">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-danger btn-sm">Dzēst</button>
+                        </form>
                     </td>
                 </tr>
                 @endforeach

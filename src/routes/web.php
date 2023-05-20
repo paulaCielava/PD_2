@@ -27,3 +27,5 @@ Route::post('/razotajs/put',  [RazotajsController::class, 'put']);
 Route::get('razotajs/update/{razotajs}', [RazotajsController::class, 'update']);
 
 Route::post('razotajs/patch/{razotajs}', [RazotajsController::class, 'patch']);
+
+Route::post('razotajs/delete/{razotajs}',[RazotajsController::class, 'delete']);
