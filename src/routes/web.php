@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RazotajsController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,11 @@ Route::get('razotajs/update/{razotajs}', [RazotajsController::class, 'update']);
 Route::post('razotajs/patch/{razotajs}', [RazotajsController::class, 'patch']);
 
 Route::post('razotajs/delete/{razotajs}',[RazotajsController::class, 'delete']);
+
+// Auth routes
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/auth', [AuthController::class, 'authenticate']);
+Route::get('/logout', [AuthController::class, 'logout']);
+
+
+

@@ -7,6 +7,11 @@ use App\Models\Razotajs;
 
 class RazotajsController extends Controller
 {
+    
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     // parāda visus ražotājus
     public function list() {
         $items = Razotajs::orderBy('name', 'asc')->get();
