@@ -37,6 +37,11 @@
                 @if(Auth::check())
 
                 <li class="nav-item">
+                    <a class="nav-link" href="/cars">Modeļi</a>
+                </li>
+
+
+                <li class="nav-item">
                     <a class="nav-link" href="/razotajs">Razotāji</a>
                 </li>
 
