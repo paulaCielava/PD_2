@@ -7,8 +7,9 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function login()
+    public function login() //(username)guest -> (password)guest123
     {
+       
         return view(
             'auth.login',
             [
@@ -33,5 +34,13 @@ class AuthController extends Controller
         ]);
     }
 
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+    
+        return redirect('/');
+    }
 
 }
