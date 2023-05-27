@@ -7,7 +7,7 @@ use App\Models\Razotajs;
 
 class RazotajsController extends Controller
 {
-    
+
     public function __construct(){
         $this->middleware('auth');
     }
@@ -37,7 +37,7 @@ class RazotajsController extends Controller
 
     // save new razotajs
     public function put(Request $request) {
-        $validateDate = $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required',
         ]);
 
@@ -61,11 +61,11 @@ class RazotajsController extends Controller
 
    // update existing objects
    public function patch(Razotajs $razotajs, Request $request){
-        $validateDate = $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required',
         ]);
 
-        $razotajs->name = $validateDate['name'];
+        $razotajs->name = $validatedData['name'];
         $razotajs->save();
 
         return redirect('/razotajs');
