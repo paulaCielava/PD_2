@@ -13,7 +13,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Nosaukums</th>
-                    <th>Ražotāji</th>
+                    <th>Ražotājs</th>
                     <th>Gads</th>
                     <th>Cena</th>
                     <th>Publicēts</th>
@@ -51,6 +51,6 @@
 
     @endif
 
-    <a href="/car/create" class="btn btn-primary"> Prievienot jaunu ražotāju </a>
+    <a href="/cars/create" class="btn btn-primary"> Prievienot jaunu ražotāju </a>
 
 @endsection
