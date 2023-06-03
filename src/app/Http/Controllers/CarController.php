@@ -76,7 +76,7 @@ class CarController extends Controller
             return redirect('/cars');
         }
 
-        private function saveCarData(Book $book, BookRequest $request) {
+        private function saveCarData(Car $car, BookRequest $request) {
             $validatedData = $request->validate([
             'name' => 'required|min:3|max:256',
             'razotajs_id' => 'required',

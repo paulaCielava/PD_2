@@ -121,6 +121,10 @@
                 class="form-control @error('image') is-invalid @enderror"
             >
 
+            @error('image')
+                <p class="invalid-feedback">{{ $errors->first('image') }}</p>
+            @enderror
+
         </div>
 
         //

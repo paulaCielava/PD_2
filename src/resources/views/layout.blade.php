@@ -40,6 +40,9 @@
                     <a class="nav-link" href="/cars">Modeļi</a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" href="/categories">Kategorijas</a>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="/razotajs">Razotāji</a>

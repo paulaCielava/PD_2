@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RazotajsController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\DataController;
 use App\Http\Controllers\AuthController;
 
 /*
@@ -42,10 +44,26 @@ Route::post('/cars/patch/{razotajs}', [CarController::class, 'patch']);
 Route::post('/cars/delete/{razotajs}',[CarController::class, 'delete']);
 
 
+// Categorie routes
+Route::get('/categories', [CategorieController::class, 'list']);
+Route::get('/categories/create', [CategorieController::class, 'create']);
+Route::post('/categories/put',  [CategorieController::class, 'put']);
+Route::get('/categories/update/{categorie}', [CategorieController::class, 'update']);
+Route::post('/categories/patch/{categorie}', [CategorieController::class, 'patch']);
+Route::post('/categories/delete/{categorie}',[CategorieController::class, 'delete']);
+
+
 // Auth routes
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/auth', [AuthController::class, 'authenticate']);
 Route::get('/logout', [AuthController::class, 'logout']);
 
 
+// Dara routes
+// Data routes
+Route::prefix('data')->group(function(){
+    Route::get('/get-top-cars', [DataController::class, 'getTopCars']);
+    Route::get('/get-car/{car}', [DataController::class, 'getCar']);
+    Route::get('/get-related-cars/{car}', [DataController::class, 'getRelatedCars']);
+});
 

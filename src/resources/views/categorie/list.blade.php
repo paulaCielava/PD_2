@@ -13,27 +13,19 @@
                 <tr>
                     <th>ID</th>
                     <th>Nosaukums</th>
-                    <th>Ražotājs</th>
-                    <th>Gads</th>
-                    <th>Cena</th>
-                    <th>Publicēts</th>
                     <th>Darbības</th>
                 </tr>
             </thead>
             <tbody>
 
-                @foreach($items as $car)
+                @foreach($items as $categorie)
                 <tr>
-                    <td>{{ $car->id }}</td>
-                    <td>{{ $car->name }}</td>
-                    <td>{{ $car->razotajs->name }}</td>
-                    <td>{{ $car->year }}</td>
-                    <td>&euro; {{ number_format($car->price, 2, '.') }}</td>
-                    <td>{!! $car->display ? '&#10004;&#65039;' : '&#10060;' !!}</td>
+                    <td>{{ $categorie->id }}</td>
+                    <td>{{ $categorie->name }}</td>
                     <td> 
-                        <a href="/cars/update/{{ $car->id }}" class="btn btn-outline-primary btn-sm">Labot</a>
+                        <a href="/categories/update/{{ $categorie->id }}" class="btn btn-outline-primary btn-sm">Labot</a>
                         / 
-                        <form method="post" action="/cars/delete/{{ $car->id }}" class="deletion-form d-inline">
+                        <form method="post" action="/categories/delete/{{ $categorie->id }}" class="deletion-form d-inline">
                             @csrf
                             <button type="submit" class="btn btn-outline-danger btn-sm">Dzēst</button>
                         </form>
@@ -51,6 +43,6 @@
 
     @endif
 
-    <a href="/cars/create" class="btn btn-primary"> Prievienot jaunu modeli </a>
+    <a href="/categories/create" class="btn btn-primary"> Prievienot jaunu kategoriju </a>
 
 @endsection
