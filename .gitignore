@@ -1,6 +1,6 @@
-
-mysql/
 /public/images
+mysql/
+
 
 src/vendor/
 src/node_modules

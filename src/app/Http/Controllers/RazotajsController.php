@@ -42,7 +42,7 @@ class RazotajsController extends Controller
         ]);
 
         $razotajs = new Razotajs();
-        $razotajs->name = $validateDate['name'];
+        $razotajs->name = $validatedData['name'];
         $razotajs->save();
 
         return redirect('/razotajs');

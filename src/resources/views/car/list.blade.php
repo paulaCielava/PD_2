@@ -14,6 +14,7 @@
                     <th>ID</th>
                     <th>Nosaukums</th>
                     <th>Ražotājs</th>
+                    <th>Kategorija</th>
                     <th>Gads</th>
                     <th>Cena</th>
                     <th>Publicēts</th>
@@ -27,6 +28,7 @@
                     <td>{{ $car->id }}</td>
                     <td>{{ $car->name }}</td>
                     <td>{{ $car->razotajs->name }}</td>
+                    <td>{{ $car->categorie ? $car->categorie->name : '' }}</td>
                     <td>{{ $car->year }}</td>
                     <td>&euro; {{ number_format($car->price, 2, '.') }}</td>
                     <td>{!! $car->display ? '&#10004;&#65039;' : '&#10060;' !!}</td>

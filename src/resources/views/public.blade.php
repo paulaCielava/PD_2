@@ -28,7 +28,10 @@
 
         <footer class="mt-5 py-5">
             <div class="container">
+                <p>
                 Paula Cielava, VeA, 2023
+                <a href="/cars">Administrācija</a>
+                </p>
             </div>
         </footer>
 

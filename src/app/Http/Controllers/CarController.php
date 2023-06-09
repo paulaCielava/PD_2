@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Car;
 use App\Models\Razotajs;
-use App\Http\Requests\BookRequest;
+use App\Http\Requests\carRequest;
 
 class CarController extends Controller
 {
@@ -42,7 +42,7 @@ class CarController extends Controller
     }
 
         // save new car
-        public function put(BookRequest $request)
+        public function put(carRequest $request)
         {
             $car = new Car();
             $this->saveCarData($car, $request);
@@ -65,7 +65,7 @@ class CarController extends Controller
         }
 
         // save new car
-        public function patch(Car $car, BookRequest $request)
+        public function patch(Car $car, carRequest $request)
         {
             $this->saveCarData($car, $request);
             return redirect('/cars/update');
@@ -76,27 +76,37 @@ class CarController extends Controller
             return redirect('/cars');
         }
 
-        private function saveCarData(Car $car, BookRequest $request) {
+        private function saveCarData(Car $car, Request $request) {
             $validatedData = $request->validate([
-            'name' => 'required|min:3|max:256',
-            'razotajs_id' => 'required',
-            'description' => 'nullable',
-            'price' => 'nullable|numeric',
-            'year' => 'numeric',
-            'image' => 'nullable|image',
-            'display' => 'nullable'
+                'name' => 'required|min:3|max:256',
+                'razotajs_id' => 'required',
+                'description' => 'nullable',
+                'price' => 'nullable|numeric',
+                'year' => 'numeric',
+                'image' => 'nullable|image',
+                'display' => 'nullable'
             ]);
-            $book->fill($validatedData);
+            /*
+            $car->name = $validatedData['name'];
+            $car->author_id = $validatedData['author_id'];
+            $car->description = $validatedData['description'];
+            $car->price = $validatedData['price'];
+            $car->year = $validatedData['year'];
             $car->display = (bool) ($validatedData['display'] ?? false);
+            */
+
+            $car->fill($validatedData);
+            $car->display = (bool) ($validatedData['display'] ?? false);
+
             if ($request->hasFile('image')) {
-            $uploadedFile = $request->file('image');
-            $extension = $uploadedFile->clientExtension();
-            $name = uniqid();
-            $car->image = $uploadedFile->storePubliclyAs(
-            '/',
-            $name . '.' . $extension,
-            'uploads'
-            );
+                $uploadedFile = $request->file('image');
+                $extension = $uploadedFile->clientExtension();
+                $name = uniqid();
+                $car->image = $uploadedFile->storePubliclyAs(
+                    '/',
+                    $name . '.' . $extension,
+                    'uploads'
+                );
             }
             $car->save();
 
