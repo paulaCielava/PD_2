@@ -19,11 +19,12 @@ class BookRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'name' => 'required|min:3|max:256',
             'razotajs_id' => 'required',
+            'categorie_id' => 'required',
             'description' => 'nullable',
             'price' => 'nullable|numeric',
             'year' => 'numeric',
@@ -50,6 +51,7 @@ class BookRequest extends FormRequest
         return [
             'name' => 'nosaukums',
             'razotajs_id' => 'razotajs',
+            'categorie_id' => 'kategorija',
             'description' => 'apraksts',
             'price' => 'cena',
             'year' => 'gads',

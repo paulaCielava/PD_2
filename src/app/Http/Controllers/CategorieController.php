@@ -2,87 +2,71 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Razotajs;
-use App\Models\Car;
 use App\Models\Categorie;
-use App\Http\Requests\BookRequest;
+use App\Http\Requests\CategorieRequest;
+
+
 
 class CategorieController extends Controller
 {
-
-    public function __construct(){
-        $this->middleware('auth');
-    }
-
-    // parāda visus categories
-    public function list() {
-        $items = Categorie::orderBy('name', 'asc')->get();
-
+    // display all genres
+    public function list()
+    {
+        $items = Categorie::orderBy('id', 'asc')->get();
         return view(
             'categorie.list',
             [
                 'title' => 'Kategorijas',
-                'items' => $items,   
+                'items' => $items
             ]
         );
     }
 
-    // display new categorie form
-    public function create() {
-
-        $razotajs = Razotajs::orderBy('name', 'asc')->get();
-        $car = Car::orderBy('name', 'asc')->get();
-
+    public function create()
+    {
         return view(
             'categorie.form',
             [
-                'title' => 'Pievienot jaunu kategoriju',
+                'title' => 'Pievienot kategoriju',
                 'categorie' => new Categorie()
             ]
         );
     }
 
-    // save new categorie
-    public function put(Request $request) {
-        $validatedData = $request->validate([
-            'name' => 'required',
-        ]);
-
+    public function put(CategorieRequest $request)
+    {
         $categorie = new Categorie();
-        $categorie->name = $validatedData['name'];
-        $categorie->save();
-
+        $this->saveCategorieData($categorie, $request);
         return redirect('/categories');
     }
 
-    // display categorie update form
-    public function update(Categorie $razotajs){
+    public function update(Categorie $categorie)
+    {
         return view(
             'categorie.form',
             [
                 'title' => 'Rediģēt kategoriju',
-                'categorie' => $categorie,
+                'categorie' => $categorie
             ]
         );
     }
 
-   // update existing objects
-   public function patch(Categorie $categorie, Request $request){
-        $validatedData = $request->validate([
-            'name' => 'required',
-        ]);
-
-        $categorie->name = $validatedData['name'];
-        $categorie->save();
-
+    public function patch(Categorie $categorie, CategorieRequest $request)
+    {
+        $this->saveCategorieData($categorie, $request);
         return redirect('/categories');
-   }
+    }
 
-
-   // ierakstu dzēšana
-   public function delete(Categorie $categorie){
+    public function delete(Categorie $categorie)
+    {
         $categorie->delete();
         return redirect('/categories');
-   }
+    }
+
+    private function saveCategorieData(Categorie $categorie, CategorieRequest $request)
+    {
+        $validatedData = $request->validated();
+        $categorie->fill($validatedData);
+        $categorie->save();
+    }
 }

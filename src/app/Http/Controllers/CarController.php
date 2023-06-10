@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Car;
 use App\Models\Razotajs;
-use App\Http\Requests\carRequest;
+use App\Http\Requests\BookRequest;
 
 class CarController extends Controller
 {
@@ -30,6 +30,7 @@ class CarController extends Controller
     public function create() {
 
         $razotajs = Razotajs::orderBy('name', 'asc')->get();
+       // $categorie = Categorie::orderBy('name', 'asc')->get();
 
         return view(
             'car.form',
@@ -37,6 +38,7 @@ class CarController extends Controller
                 'title' => 'Pievienot jaunu modeli',
                 'car' => new Car(),
                 'razotajs' => $razotajs,
+                //'categorie' => $categories,
             ]
         );
     }
@@ -53,6 +55,7 @@ class CarController extends Controller
         public function update(Car $car) {
 
             $razotajs = Razotajs::orderBy('name', 'asc')->get();
+            $categorie = Categorie::orderBy('name', 'asc')->get();
 
             return view(
                 'car.form',
@@ -60,6 +63,7 @@ class CarController extends Controller
                     'title' => 'Rediģēt modeli',
                     'car' => $car,
                     'razotajs' => $razotajs,
+                    'categorie' => $categories,
                 ]
             );
         }
@@ -68,7 +72,7 @@ class CarController extends Controller
         public function patch(Car $car, carRequest $request)
         {
             $this->saveCarData($car, $request);
-            return redirect('/cars/update');
+            return redirect('/cars/update' . $car->id);
         }
 
         public function delete(Car $car){
@@ -76,41 +80,24 @@ class CarController extends Controller
             return redirect('/cars');
         }
 
-        private function saveCarData(Car $car, Request $request) {
-            $validatedData = $request->validate([
-                'name' => 'required|min:3|max:256',
-                'razotajs_id' => 'required',
-                'description' => 'nullable',
-                'price' => 'nullable|numeric',
-                'year' => 'numeric',
-                'image' => 'nullable|image',
-                'display' => 'nullable'
-            ]);
-            /*
-            $car->name = $validatedData['name'];
-            $car->author_id = $validatedData['author_id'];
-            $car->description = $validatedData['description'];
-            $car->price = $validatedData['price'];
-            $car->year = $validatedData['year'];
-            $car->display = (bool) ($validatedData['display'] ?? false);
-            */
-
+        private function saveCarData(Car $car, BookRequest $request)
+        {
+            $validatedData = $request->validated();
+    
             $car->fill($validatedData);
             $car->display = (bool) ($validatedData['display'] ?? false);
-
             if ($request->hasFile('image')) {
                 $uploadedFile = $request->file('image');
                 $extension = $uploadedFile->clientExtension();
                 $name = uniqid();
-                $car->image = $uploadedFile->storePubliclyAs(
+                $book->image = $uploadedFile->storePubliclyAs(
                     '/',
                     $name . '.' . $extension,
                     'uploads'
                 );
             }
             $car->save();
-
-            }
+        }
 
 
 

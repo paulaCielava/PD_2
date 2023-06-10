@@ -30,7 +30,7 @@
             <div class="container">
                 <p>
                 Paula Cielava, VeA, 2023
-                <a href="/cars">Administrācija</a>
+                <a href="/cars">Autorizācija</a>
                 </p>
             </div>
         </footer>

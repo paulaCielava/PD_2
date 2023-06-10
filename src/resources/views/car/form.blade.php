@@ -16,6 +16,30 @@
     <form method="post" action="{{ $car->exists ? '/cars/patch/' . $car->id : '/cars/put' }}" enctype="multipart/form-data">
         @csrf
 
+        <div class="mb-3">
+            <label for="car-image" class="form-label">Attēls</label>
+
+            @if ($car->image)
+                <img
+                    src="{{ asset('images/' . $car->image) }}"
+                    class="img-fluid img-thumbnail d-block mb-2"
+                    alt="{{ $car->name }}"
+                >
+            @endif
+
+            <input
+                type="file" accept="image/png, image/jpeg"
+                id="car-image"
+                name="image"
+                class="form-control @error('image') is-invalid @enderror"
+            >
+
+            @error('image')
+                <p class="invalid-feedback">{{ $errors->first('image') }}</p>
+            @enderror
+
+        </div>
+
 
         <div class="mb-3">
             <label for="car-name" class="form-label">Mašīnas nosaukums</label>
@@ -125,29 +149,7 @@
             @enderror
         </div>
 
-        <div class="mb-3">
-            <label for="car-image" class="form-label">Attēls</label>
-
-            @if ($car->image)
-                <img
-                    src="{{ asset('images/' . $car->image) }}"
-                    class="img-fluid img-thumbnail d-block mb-2"
-                    alt="{{ $car->name }}"
-                >
-            @endif
-
-            <input
-                type="file" accept="image/png, image/jpeg"
-                id="car-image"
-                name="image"
-                class="form-control @error('image') is-invalid @enderror"
-            >
-
-            @error('image')
-                <p class="invalid-feedback">{{ $errors->first('image') }}</p>
-            @enderror
-
-        </div>
+        
 
         //
 
