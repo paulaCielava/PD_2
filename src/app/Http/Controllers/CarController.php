@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+
 use App\Models\Car;
 use App\Models\Razotajs;
+use App\Models\Categorie;
 use App\Http\Requests\BookRequest;
 
 class CarController extends Controller
@@ -30,7 +31,7 @@ class CarController extends Controller
     public function create() {
 
         $razotajs = Razotajs::orderBy('name', 'asc')->get();
-       // $categorie = Categorie::orderBy('name', 'asc')->get();
+        $categories = Categorie::orderBy('name', 'asc')->get();
 
         return view(
             'car.form',
@@ -38,13 +39,13 @@ class CarController extends Controller
                 'title' => 'Pievienot jaunu modeli',
                 'car' => new Car(),
                 'razotajs' => $razotajs,
-                //'categorie' => $categories,
+                //'categories' => $categorie,
             ]
         );
     }
 
         // save new car
-        public function put(carRequest $request)
+        public function put(BookRequest $request)
         {
             $car = new Car();
             $this->saveCarData($car, $request);
@@ -55,7 +56,7 @@ class CarController extends Controller
         public function update(Car $car) {
 
             $razotajs = Razotajs::orderBy('name', 'asc')->get();
-            $categorie = Categorie::orderBy('name', 'asc')->get();
+            $categories = Categorie::orderBy('name', 'asc')->get();
 
             return view(
                 'car.form',
@@ -63,7 +64,7 @@ class CarController extends Controller
                     'title' => 'Rediģēt modeli',
                     'car' => $car,
                     'razotajs' => $razotajs,
-                    'categorie' => $categories,
+                    'categories' => $categorie,
                 ]
             );
         }

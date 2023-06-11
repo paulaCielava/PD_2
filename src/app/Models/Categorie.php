@@ -9,7 +9,7 @@ class Categorie extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'categorie_id', 'description', 'price', 'year'];
+    protected $fillable = ['categorie'];
 
 
     public function car(){
